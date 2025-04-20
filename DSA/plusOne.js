@@ -14,7 +14,7 @@
 // Thus, the result should be [1,0].
 
 // let digits = [1, 2, 3];
-let digits = [9];
+let digits = [9;
 function plusOne(digits) {
   for (let i = digits.length - 1; i >= 0; i--) {
     if (digits[i] !== 9) {
