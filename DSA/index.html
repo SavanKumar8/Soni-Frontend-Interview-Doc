@@ -7,10 +7,13 @@
     <title>Document</title>
   </head>
   <body>
-    <input onkeyup="debounceData()"> search here..</input>
-    <script src="./debounce.js"></script>
+    <!-- <input onkeyup="debounceData()"> search here..</input> -->
+
+    <button id="clickButton">click Me</button>
+    <script src="./throttle.js"></script>
   </body>
 </html>
+
 <!-- 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,6 +60,76 @@
         () => console.log("Single click"),
         () => console.log("Double click ")
       );
+    </script>
+  </body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Throttle vs Debounce Demo</title>
+    <style>
+      body {
+        height: 2000px;
+        padding: 50px;
+        font-family: sans-serif;
+      }
+      .log {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: #f5f5f5;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="log">
+      <strong>Throttle:</strong> <span id="throttleCount">0</span><br />
+      <strong>Debounce:</strong> <span id="debounceCount">0</span>
+    </div>
+
+    <script>
+      let throttleCounter = 0;
+      let debounceCounter = 0;
+
+      // THROTTLE FUNCTION
+      function throttle(fn, delay) {
+        let last = 0;
+        return function (...args) {
+          const now = Date.now();
+          if (now - last >= delay) {
+            last = now;
+            fn.apply(this, args);
+          }
+        };
+      }
+
+      // DEBOUNCE FUNCTION
+      function debounce(fn, delay) {
+        let timer;
+        return function (...args) {
+          clearTimeout(timer);
+          timer = setTimeout(() => fn.apply(this, args), delay);
+        };
+      }
+
+      // Throttle handler
+      const throttledScroll = throttle(() => {
+        document.getElementById("throttleCount").textContent =
+          ++throttleCounter;
+      }, 1000);
+
+      // Debounce handler
+      const debouncedScroll = debounce(() => {
+        document.getElementById("debounceCount").textContent =
+          ++debounceCounter;
+      }, 1000);
+
+      // Add both to scroll
+      window.addEventListener("scroll", throttledScroll);
+      window.addEventListener("scroll", debouncedScroll);
     </script>
   </body>
 </html> -->
