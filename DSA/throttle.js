@@ -16,6 +16,15 @@ function throttle(fn, delay) {
   };
 }
 
+// function test() {
+//   console.log(arguments);
+// }
+
+// const test1 = () => {
+//   console.log(arguments);
+// };
+// test1();
+
 // case 2
 
 // function throttle2(fn, delay) {
@@ -35,3 +44,21 @@ const clickMeButton = () => {
 };
 
 button.addEventListener("click", throttle(clickMeButton, 2000));
+
+function callThis(city, state) {
+  console.log(`${this.name},${city}, ${state}`);
+}
+//callThis.call({ name: "savan" }, ["pune", "MH"]);
+//callThis.apply({ name: "savan" }, ["pune", "MH"]);
+
+//pollyfill of bind - it return the function which we can call later
+
+Function.prototype.myBind = function (context, ...args1) {
+  let functionCall = this;
+  return function (...args2) {
+    console.log(functionCall.apply(context, [...args1, ...args2]));
+  };
+};
+
+const result = callThis.myBind({ name: "savan" }, "Rehlu", "Shahpur - HP");
+result();
